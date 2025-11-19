@@ -29,10 +29,10 @@ public class StatementPrinter {
         for (Performance p : invoice.getPerformances()) {
             result.append(String.format("  %s: %s (%s seats)%n",
                     getPlay(p).getName(),
-                    money(getAmount(p)),
+                    usd(getAmount(p)),
                     p.getAudience()));
         }
-        result.append(String.format("Amount owed is %s%n", money(getTotalAmount())));
+        result.append(String.format("Amount owed is %s%n", usd(getTotalAmount())));
         result.append(String.format("You earned %s credits%n", getTotalVolumeCredits()));
         return result.toString();
     }
@@ -53,7 +53,7 @@ public class StatementPrinter {
         return volumeCredits;
     }
 
-    private String money(int amount) {
+    private String usd(int amount) {
         final NumberFormat frmt = NumberFormat.getCurrencyInstance(Locale.US);
         return frmt.format(amount / Constants.PERCENT_FACTOR);
     }
